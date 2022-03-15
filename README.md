@@ -1,2 +1,2 @@
-# angular-recipe-app
-Recipe sample App using Angular
+
+Recipe app created after passing https://www.udemy.com/course/the-complete-guide-to-angular-2/
