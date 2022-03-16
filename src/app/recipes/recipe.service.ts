@@ -10,12 +10,12 @@ export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
 
   private recipes: Recipe[] = [
-    new Recipe(
+    new Recipe(1,
       'Rost chicken',
       'This is a Roast Chicken',
       'https://static.onecms.io/wp-content/uploads/sites/9/2021/02/12/roast-chicken-with-chile-basil-vinaigrette-charred-broccoli-potatoes-FT-RECIPE0321.jpg',
       [new Ingredient("Meat", 1), new Ingredient("Brocolli", 4)]),
-    new Recipe(
+    new Recipe(2,
       'Salad',
       'This is another salad',
       'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8&w=1000&q=80',
@@ -28,6 +28,15 @@ export class RecipeService {
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
     this.shoppingListService.addIngredients(ingredients);
+  }
+
+  getRecipeById(id: number){
+    const recipe = this.recipes.find(
+      (s) => {
+        return s.id === id;
+      }
+    );
+    return recipe;
   }
 
   constructor(private shoppingListService: ShoppingListService) {
