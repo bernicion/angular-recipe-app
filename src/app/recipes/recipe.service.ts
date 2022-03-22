@@ -10,18 +10,12 @@ import {Subject} from "rxjs";
 export class RecipeService {
   recipesChanged = new Subject();
 
-  private recipes: Recipe[] = [
-    new Recipe(1,
-      'Rost chicken',
-      'This is a Roast Chicken',
-      'https://static.onecms.io/wp-content/uploads/sites/9/2021/02/12/roast-chicken-with-chile-basil-vinaigrette-charred-broccoli-potatoes-FT-RECIPE0321.jpg',
-      [new Ingredient("Meat", 1), new Ingredient("Brocolli", 4)]),
-    new Recipe(2,
-      'Salad',
-      'This is another salad',
-      'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8NHx8fGVufDB8fHx8&w=1000&q=80',
-      [new Ingredient("Cheries", 8), new Ingredient("Lemon", 1)])
-  ];
+  private recipes: Recipe[] = [];
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice();
@@ -44,7 +38,7 @@ export class RecipeService {
     this.recipesChanged.next(this.recipes.slice());
   }
 
-  private getIndexOfId(id: number){
+  private getIndexOfId(id: number) {
     let index = 0;
     for (let recipe of this.recipes) {
       if (recipe.id === id) {
